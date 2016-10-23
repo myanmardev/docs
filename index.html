@@ -1,3 +1,4 @@
+<title>RUN NODEJS</title>
 <style>
 body {
 font-family:Arial;
@@ -87,16 +88,34 @@ width: 120px;
 
 <header class="app-header">
 		<h1 class="app-title">RUN NODE</h1>
-		<h1 class="app-headline">Run nodejs in Browser</h1>
+		<h1 class="app-headline">Run nodejs in Browser.</h1>
 	</header>
   <script src="https://embed.runkit.com" data-element-id="my-element"></script>
 
 <!-- anywhere else on your page -->
 <div id="my-element" class="app-body">
-function foo()
-{
-    return "hello world"
-}
+var request = require("request");
+var cheerio = require("cheerio");
 
-foo();
+var url = 'http://www.espnfc.com/english-premier-league/23/statistics/performance'
+var options = {
+    url: url,
+    headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+        'accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+};
+
+request(options, function(err, resp, html) {
+    console.log();
+    $ = cheerio.load(resp.body);
+    links = $('#feed-page-primary-content');
+    var title = [];
+    $(links).each(function(i, link) {
+        var data = $(this)
+	console.log(data.html());
+	})
+	
+	})
 </div>
